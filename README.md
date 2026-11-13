@@ -10,9 +10,6 @@ before and after the workflow. No Space or external API service is used.
 
 ## Install
 
-While this repository/model is private, authenticate GitHub and Hugging Face
-(`gh auth login`, `hf auth login`) with an account granted access.
-
 Clone/copy this repository to `ComfyUI/custom_nodes/moss-anypaint`, then install
 `requirements.txt` with the Python interpreter used by your ComfyUI instance.
 Use Python 3.11+, a recent ComfyUI build and a CUDA GPU with BF16 support.
