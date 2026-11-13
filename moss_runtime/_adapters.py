@@ -14,9 +14,15 @@ def sha(path):
             h.update(chunk)
     return h.hexdigest()
 
+def validate_seed(seed):
+    if isinstance(seed, bool) or not isinstance(seed, int) or not 0 <= seed <= 0xffffffffffffffff:
+        raise ValueError("Seed must be an integer between 0 and 2**64 - 1")
+
 def seed_all(seed):
+    validate_seed(seed)
     random.seed(seed)
-    np.random.seed(seed)
+    # NumPy's legacy RNG accepts uint32; retain the full uint64 for Torch noise.
+    np.random.seed(seed % (2**32))
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
 

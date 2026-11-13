@@ -243,8 +243,26 @@ def prepare_in_out(
 AnyPaintInput = InOutInput
 
 def prepare_anypaint(source, generated_mask, canvas_size, bbox=None):
-    """White/255 pixels are generated; bbox is source placement in canvas pixels."""
+    """Place a source/canvas mask; white pixels generate, bbox uses canvas pixels.
+
+    A canvas-sized mask is already registered. A source-sized mask follows the
+    source's bbox transform. Other sizes are rejected instead of stretched.
+    """
     width,height=map(int,canvas_size)
+    validate_app_resolution(width, height)
     x0,y0,x1,y1=bbox or (0,0,width,height)
     box=OutpaintBox(x0/width,y0/height,(x1-x0)/width,(y1-y0)/height)
+    box.validate(allow_outside=True)
+    if generated_mask is not None:
+        generated_mask = generated_mask.convert("L")
+        if generated_mask.size != (width, height):
+            if generated_mask.size != source.size:
+                raise ValueError("Mask must match either the source image or the output canvas")
+            placed_width = max(1, round(box.width * width))
+            placed_height = max(1, round(box.height * height))
+            paste_x = round((box.x + box.width / 2) * width - placed_width / 2)
+            paste_y = round((box.y + box.height / 2) * height - placed_height / 2)
+            placed_mask = generated_mask.resize((placed_width, placed_height), Image.Resampling.NEAREST)
+            generated_mask = Image.new("L", (width, height), 0)
+            generated_mask.paste(placed_mask, (paste_x, paste_y))
     return prepare_in_out(source,width,height,box,generated_mask)

@@ -56,6 +56,12 @@ The default example is seed 2026,8 steps. The sampler returns raw decoded RGB,
 with no final source composite. The loader checks the selected task and DMD2
 hashes, and the two adapters stay separate.
 
+Seeds accept the full uint64 range (0 through2**64−1), including ComfyUI's
+randomize mode. Source-sized masks follow the padding offset; canvas-sized masks
+already use canvas coordinates. For the portable HF helper the same rule applies
+to bbox placement/scaling; when source/canvas sizes are equal, canvas coordinates
+take priority.
+
 `keep_model_loaded=true` keeps the shared runtime for subsequent seeds. Set it
 false to release its GPU/CPU model allocations after the current image when
 switching to another model or needing VRAM. Prompt text is cached independently
@@ -87,3 +93,11 @@ the same decoded RGB values. See the runtime lock for exact model revisions.
 
 The distribution includes SHA256SUMS for all shipped files. Release assets also
 include a ComfyUI ZIP, its checksum, and both UI/API workflow JSON files.
+
+## v0.1.1 update
+
+Fixes the large-seed failure in v0.1.0 and the portable source-mask placement
+behavior. The builders now reject unlisted source files and symlinks before
+copying. The selected4303 adapter, seed2026 examples, sampler and precision are
+unchanged; update the node code/runtime together, with no new weights required.
+The v0.1.0 tag and assets remain available as historical artifacts.

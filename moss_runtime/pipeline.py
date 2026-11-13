@@ -21,10 +21,10 @@ os.environ.setdefault("DIFFSYNTH_ATTENTION_IMPLEMENTATION", "torch")
 
 try:
     from .anypaint import prepare_anypaint
-    from ._adapters import LOCK, sha
+    from ._adapters import LOCK, sha, validate_seed
 except ImportError:
     from anypaint import prepare_anypaint
-    from _adapters import LOCK, sha
+    from _adapters import LOCK, sha, validate_seed
 
 
 class MOSSAnyPaintPipeline:
@@ -99,8 +99,9 @@ class MOSSAnyPaintPipeline:
 
     @torch.no_grad()
     def generate(self, prepared, prompt, *, seed=2026, steps=8):
-        if not isinstance(seed, int) or seed < 0 or not 1 <= steps <= 50:
-            raise ValueError("Use a nonnegative integer seed and1..50 steps")
+        validate_seed(seed)
+        if isinstance(steps, bool) or not isinstance(steps, int) or not 1 <= steps <= 50:
+            raise ValueError("Steps must be an integer between 1 and 50")
         with self._lock:
             self.load()
             try:
