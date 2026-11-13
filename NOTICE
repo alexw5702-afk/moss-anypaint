@@ -1,0 +1,31 @@
+MOSS AnyPaint
+Copyright 2026 DeepMachine contributors.
+
+This is an unofficial community adapter for OpenMOSS-Team/MOSS-Image-Base,
+released under Apache License 2.0. It is not endorsed by OpenMOSS or the
+community distillation author.
+
+Base weights/code: https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base
+Base revision:85975793d8b3d432f1b6e27f352abaa4c2a4c0d3
+MOSS original code: https://github.com/OpenMOSS/MOSS-Image
+Runtime/model helpers derive from DiffSynth-Studio (Apache-2.0), pinned at
+55fdfb23987672528d2cf71f4a9d44aba44c1863:
+https://github.com/modelscope/DiffSynth-Studio
+The registered reference forward in moss_model.py is a modified derivative.
+
+The required Base 8-step DMD2 adapter is downloaded separately from
+https://huggingface.co/lodestones/MOSS-Image-Base-8-steps-dmd
+revision da05cb3b52899179e2bb5f7efe1058fefcbae21b (Apache-2.0).
+It remains FP32 and unmerged. Do not substitute an SFT adapter or the earlier
+lora.safetensors file. This package does not redistribute the DMD2 weights.
+
+Showcase sources are synthetic Krea-generated examples already included in
+our earlier Krea AnyPaint release. The outputs in this package are generated
+with MOSS AnyPaint4303 at seed 2026. No training data is distributed.
+
+Mask/canvas and workflow interfaces follow the earlier DeepMachine Krea
+AnyPaint release; the Krea model-specific reference implementation and its
+model weights are not included in this MOSS runtime.
+
+Full per-component license text and provenance: THIRD_PARTY_NOTICES.md and licenses/.
+Code license: PIPELINE_LICENSE. Upstream rights remain with their authors.

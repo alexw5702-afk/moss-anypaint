@@ -1,0 +1,350 @@
+[
+  {
+    "id": "01_photo_internal",
+    "label": "Photographic internal edit",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1024,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "a sunlit modern kitchen interior with a handmade ceramic bowl of fresh lemons on the center island, coherent morning light, complete architectural photograph",
+    "source": "01_photo_internal_source.webp",
+    "mask": "01_photo_internal_mask.png",
+    "input": "01_photo_internal_input_mask.webp",
+    "result": "01_photo_internal_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "0bef8e0e5ecb74ef789d8dc591fc204d89b7cd6996e1789dddfdfcffbc5c58fc",
+      "mask": "7d27ee47ac736e14b41a2c0e91f80eb8c8a4c5e75732d37a7118ef0cc5a3d22e",
+      "input": "7b17fee8e85874498bd08f5e34d3f36fc65b436fc82296d75f1d99520acdba76",
+      "result": "76892d024d6a289cba663d662147a15e713ac4ee79c8a6f15f6a94a9d277ec36"
+    }
+  },
+  {
+    "id": "02_watercolor_outpaint",
+    "label": "Watercolor downward outpainting",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1024,
+      1536
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "an original watercolor greenhouse and coastal garden, the path and flowering plants continuing naturally downward, airy washes, complete vertical composition",
+    "source": "02_watercolor_outpaint_source.webp",
+    "mask": "02_watercolor_outpaint_mask.png",
+    "input": "02_watercolor_outpaint_input_mask.webp",
+    "result": "02_watercolor_outpaint_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "4efe48474687d31d47f8b89b4c73e47a9369d37d47695741c225cc30dd55f437",
+      "mask": "69a6a3a1f8e4e9e9d705545dbe4fe849e4685aaade3c405a4a0caa17a14e11b8",
+      "input": "e543e503f02b3e1cf9946cb27500bf592356dca9a85f7156dbc310c6ba6735f8",
+      "result": "7a885accc971df2ea68649b125bf6376167bf5ad474b9a42a4e276fb93eafba4"
+    }
+  },
+  {
+    "id": "03_3d_outpaint",
+    "label": "Stylized 3D horizontal outpainting",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1536,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "an original retro-futuristic exploration rover crossing a colorful alien desert, distant mineral formations extending to the right, stylized 3D cinematic render",
+    "source": "03_3d_outpaint_source.webp",
+    "mask": "03_3d_outpaint_mask.png",
+    "input": "03_3d_outpaint_input_mask.webp",
+    "result": "03_3d_outpaint_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "447be13e6afb4f534fb3520e8649ee380eba5da12cdb3e9538fdecc2bd5b8578",
+      "mask": "dc1612b94e9ec3b07bdc4abb1b7480e3068537e94f9bedd34758ec06dd4dbdae",
+      "input": "f05750e922210ea4ad650259f50bf2821b1d57d89ce19366a2a1e8e8011bed4d",
+      "result": "3cd6f02992768e88a2995445c2097deae22e7f583c18f55a8e08c9983d82e227"
+    }
+  },
+  {
+    "id": "04_portrait_mixed",
+    "label": "Original-character mixed edit",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1536,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "an original adult woman with short silver hair wearing a richly textured coral coat in a spacious contemporary gallery, complete full-body fashion photograph",
+    "source": "04_portrait_mixed_source.webp",
+    "mask": "04_portrait_mixed_mask.png",
+    "input": "04_portrait_mixed_input_mask.webp",
+    "result": "04_portrait_mixed_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "aae5ff6ba55f6ed47bdb931c3a8af13f6e6c4ef9216160dc34c8bb2305405c69",
+      "mask": "2f2ac67652f469418fc767cd53afee2e51c69d0a8ba88aaf5dcad08c519609f7",
+      "input": "e09e9e0548334815040a526e99c0c9ef3f34745dcb0930d589571508e175fb0c",
+      "result": "554b98f02ceecb29b4e6f02fcc5b90971c883130ad786c6ca3d715234b8fe5d7"
+    }
+  },
+  {
+    "id": "05_botanical_disconnected",
+    "label": "Disconnected honeybee insertion",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1024,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "an original botanical field illustration of blue and white meadow flowers with three small honeybees hovering naturally between the blossoms, delicate wings, fine paper texture, naturalistic painted details",
+    "source": "05_botanical_disconnected_source.webp",
+    "mask": "05_botanical_disconnected_mask.png",
+    "input": "05_botanical_disconnected_input_mask.webp",
+    "result": "05_botanical_disconnected_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "148b15d23e1cbae3cddf424b2e64b0b716ab65df8571c29b4703e9258c0c3f25",
+      "mask": "fc4090c3a9279980df307a8f5592f20fa6e506bec6fb57f827a4dd23f7f4333d",
+      "input": "7d9077a1df46b9c9a199c0676664e48389586a92ecb25ed983f4f60811e7fa8d",
+      "result": "399c58b313f7af259b69facf0f0ac6af691026dc59d0b5a83ddc814bf894e6f5"
+    }
+  },
+  {
+    "id": "07_product_narrow",
+    "label": "Narrow cable recolor",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1024,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "an original sculptural brushed aluminum desk lamp with a vivid orange braided power cable extending from the lamp across the tabletop, premium neutral product photography",
+    "source": "07_product_narrow_source.webp",
+    "mask": "07_product_narrow_mask.png",
+    "input": "07_product_narrow_input_mask.webp",
+    "result": "07_product_narrow_result.webp",
+    "mask_buffer_px": 24,
+    "sha256": {
+      "source": "b67270bd9d12001cb125e6aad8efa00f92309adbbfbcb485476a9acd16a32256",
+      "mask": "538429d0cc1fec32359431d58d83eb3a319d77caf3c4bfa3cbea219ac412e52e",
+      "input": "7b7a4a62a47cef38bb0abc2f3e9cc35c97469b74d60765655995100d3df1be61",
+      "result": "539f364fddaf34fe5e8d785b75e2ca74e7939780c7261d11bc74738e8910fef9"
+    }
+  },
+  {
+    "id": "08_landscape_complex",
+    "label": "Complex semantic landscape edit",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1536,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "prompt": "an original alpine valley after rain with clusters of luminous rainbow-colored fantasy mushrooms growing along the winding riverbanks and foreground rocks, subtle magical glow reflected in wet stone, coherent wide cinematic landscape photograph",
+    "source": "08_landscape_complex_source.webp",
+    "mask": "08_landscape_complex_mask.png",
+    "input": "08_landscape_complex_input_mask.webp",
+    "result": "08_landscape_complex_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "e79e3ddf8aa03f1a9ad32b1ab68a5d036a7aa4bffcc572e6c8f3ae2c2758ad2f",
+      "mask": "56914e9d22caf0ef23070bba069d61bf5d6726005638594e0411ed8254fc37a7",
+      "input": "a5f4fdcc56f23680147f4f90e126341b79ed336615ef1f82d5d6f398a198b060",
+      "result": "bedcd567ede4741c495ec0d8ae0fa5e64c12788d87c1692fcbd37a3f3da8bce7"
+    }
+  },
+  {
+    "id": "10_female_accessories",
+    "label": "Female disconnected accessories",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1024,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "a polished portrait of an adult woman with shoulder-length auburn hair, a dark green enamel hair clip above her left ear and matching small geometric earrings, simple cream blouse, coherent natural daylight and pale gray studio background",
+    "source": "10_female_accessories_source.webp",
+    "mask": "10_female_accessories_mask.png",
+    "input": "10_female_accessories_input_mask.webp",
+    "result": "10_female_accessories_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "4af3742b1e854ced89ab484aa8ed815d8bdd4a2eef9e6c46cad1d5ea5299f76f",
+      "mask": "5175c194d12349605ea6a1e61a7aca0061cc419834023f7fcbb62bfa58314bad",
+      "input": "2d5b89dc3c0e0cb729f38af3666fcfccc3a3b0832fe83259c8b8d305d85134af",
+      "result": "2ae2aa628ba15e4a98d6d882b5522cd07791bef98f0430487fb53faff675f0ed"
+    }
+  },
+  {
+    "id": "11_product_restyle",
+    "label": "Shoes and bag local redesign",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1024,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "an overhead catalog photograph with a pair of deep forest-green suede sneakers on the left and a cobalt-blue structured leather shoulder bag on the right, refined minimal hardware, balanced composition, coherent soft studio shadows",
+    "source": "11_product_restyle_source.webp",
+    "mask": "11_product_restyle_mask.png",
+    "input": "11_product_restyle_input_mask.webp",
+    "result": "11_product_restyle_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "eaf32a072c469895e9af1b0d5f439a1310c0461baa805f699e5b0b43d7cbd7e4",
+      "mask": "86fb57bed159701f3db7631dfae87b7264b920291f0ea4ca8ee614051bc4f253",
+      "input": "7b4c5486d53e5c466a038450a04b7e10c1ff2c52c54f61d6bc0b467f910cd0d3",
+      "result": "58d379b69c6c0c013786d143c873fbe3d06b4c285c2c6e721d718a4ba7672e38"
+    }
+  },
+  {
+    "id": "12_desk_objects",
+    "label": "Two desktop object insertions",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1024,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "a clean oak writing desk in a softly lit home office with a handmade dark green ceramic mug on the left side and a small potted succulent in a matte white planter on the right, coherent restrained contemporary interior photograph",
+    "source": "12_desk_objects_source.webp",
+    "mask": "12_desk_objects_mask.png",
+    "input": "12_desk_objects_input_mask.webp",
+    "result": "12_desk_objects_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "13b1ecd113e8438dbfeeb82f5af6f83237db19d15e11c2a7d6bdd47500308ebb",
+      "mask": "9b0e48dc84dd325ed32e6e704d5d326981fa78e76da441ac0726ef383db387c3",
+      "input": "24bf564bdafbe5d7fa0db202e7fe6b45ab6b2425b296e1b69c513b1963283e52",
+      "result": "9dd85dcb5a357e56dfb11aac8c4c50bdacb513a52d76931f26fd0809221e0dc3"
+    }
+  },
+  {
+    "id": "13_living_room_objects",
+    "label": "Living-room multi-region insertion",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1024,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "a bright neutral living room with a tall brushed-brass floor lamp beside the left end of the cream sofa and a round woven storage basket beside the right end, simple coffee table, coherent warm daylight and understated architectural photography",
+    "source": "13_living_room_objects_source.webp",
+    "mask": "13_living_room_objects_mask.png",
+    "input": "13_living_room_objects_input_mask.webp",
+    "result": "13_living_room_objects_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "f5249882b049389a48450d7dfd4c7414a748547d24a19ddb3e1e0ef1ede5132b",
+      "mask": "4f96562e46bf8ad09b8a854b50fefb38832c873a9b9ad5de7a636649372f8b73",
+      "input": "5a6813be77759ca4843e6d563d6a0ff8cbbb615e8165bb870f9b5c6cd4b86cf0",
+      "result": "30f7b1022daaa1aefc3c97f29afa9718cd55813dfdd900e514fc6e90d96035a3"
+    }
+  },
+  {
+    "id": "14_window_view",
+    "label": "Complete window-view replacement",
+    "seed": 2026,
+    "steps": 8,
+    "checkpoint_step": 4303,
+    "canvas_size": [
+      1024,
+      1024
+    ],
+    "bbox": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "prompt": "a quiet contemporary reading room whose large central picture window overlooks a snowy mountain lake beneath a clear pale-blue winter sky, armchair in the foreground, coherent daylight, reflections and realistic interior photography",
+    "source": "14_window_view_source.webp",
+    "mask": "14_window_view_mask.png",
+    "input": "14_window_view_input_mask.webp",
+    "result": "14_window_view_result.webp",
+    "mask_buffer_px": 0,
+    "sha256": {
+      "source": "72946cd875ff9dc145525ec967d704ab6674ce3c92c42c8489055ccdae598ff6",
+      "mask": "efd16deeade385111ed0104eb5afb216976e2c3fef5e9d7f8719f17a01049a33",
+      "input": "6afca129305823a5ff1dd52be1921bd1680dcc47bf351c47ea08435267c13ed3",
+      "result": "7346dd2989bdb896448cefcb2de19a545cccc69e05009cb2017e125904f7765f"
+    }
+  }
+]

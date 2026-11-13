@@ -1,0 +1,29 @@
+[project]
+name = "moss-anypaint"
+version = "0.1.0"
+description = "MOSS AnyPaint arbitrary-mask editing and outpainting, using the shared released runtime"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.11"
+dependencies = [
+  "torch>=2.8",
+  "torchvision",
+  "numpy",
+  "Pillow>=10.1",
+  "opencv-python-headless",
+  "safetensors>=0.6",
+  "huggingface_hub",
+  "transformers==5.5.3",
+  "peft==0.18.1",
+  "optimum-quanto==0.2.4",
+  "accelerate>=1.12",
+  "diffsynth @ git+https://github.com/modelscope/DiffSynth-Studio.git@55fdfb23987672528d2cf71f4a9d44aba44c1863"
+]
+
+[project.urls]
+Repository = "https://github.com/alexw5702-afk/moss-anypaint"
+Model = "https://huggingface.co/yijunwang2/moss-anypaint"
+
+[tool.comfy]
+PublisherId = "alexw5702-afk"
+DisplayName = "MOSS AnyPaint"
+Icon = "https://raw.githubusercontent.com/alexw5702-afk/moss-anypaint/main/icon.svg"

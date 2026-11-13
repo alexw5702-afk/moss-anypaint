@@ -1,0 +1,85 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "moss_anypaint_source.png"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "moss_anypaint_mask.png"
+    }
+  },
+  "3": {
+    "class_type": "ImageToMask",
+    "inputs": {
+      "image": [
+        "2",
+        0
+      ],
+      "channel": "red"
+    }
+  },
+  "4": {
+    "class_type": "MOSSAnyPaintLoader",
+    "inputs": {
+      "anypaint_lora": "moss_anypaint_rank32.safetensors",
+      "dmd2_lora": "lora_dmd2.safetensors",
+      "base_model_dir": ""
+    }
+  },
+  "5": {
+    "class_type": "MOSSAnyPaintPrepare",
+    "inputs": {
+      "source": [
+        "1",
+        0
+      ],
+      "generated_mask": [
+        "3",
+        0
+      ],
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    }
+  },
+  "6": {
+    "class_type": "MOSSAnyPaintGenerate",
+    "inputs": {
+      "pipeline": [
+        "4",
+        0
+      ],
+      "prepared": [
+        "5",
+        0
+      ],
+      "prompt": "a clean oak writing desk in a softly lit home office with a handmade dark green ceramic mug on the left side and a small potted succulent in a matte white planter on the right, coherent restrained contemporary interior photograph",
+      "seed": 2026,
+      "steps": 8,
+      "keep_model_loaded": true
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "6",
+        0
+      ],
+      "filename_prefix": "MOSS_AnyPaint"
+    }
+  },
+  "8": {
+    "class_type": "PreviewImage",
+    "inputs": {
+      "images": [
+        "5",
+        1
+      ]
+    }
+  }
+}

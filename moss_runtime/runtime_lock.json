@@ -1,0 +1,46 @@
+{
+  "base_model": {
+    "repo": "OpenMOSS-Team/MOSS-Image-Base",
+    "revision": "85975793d8b3d432f1b6e27f352abaa4c2a4c0d3"
+  },
+  "distillation": {
+    "repo": "lodestones/MOSS-Image-Base-8-steps-dmd",
+    "revision": "da05cb3b52899179e2bb5f7efe1058fefcbae21b",
+    "files": {
+      "README.md": {
+        "size": 2614,
+        "sha256": null
+      },
+      "lora_dmd2.safetensors": {
+        "size": 1189176800,
+        "sha256": "7683fe1fb51f73f5d690f24dd6b7f46f31ab9a9873729a854ac5c9a420ffe6f2"
+      }
+    },
+    "precision": "float32 unmerged adapter on qfloat8/BF16 Base",
+    "default_steps": 8,
+    "cfg": 1,
+    "shift": 5
+  },
+  "diffsynth": {
+    "url": "https://github.com/modelscope/DiffSynth-Studio.git",
+    "revision": "55fdfb23987672528d2cf71f4a9d44aba44c1863"
+  },
+  "task": {
+    "repo": "yijunwang2/moss-anypaint",
+    "file": "moss_anypaint_rank32.safetensors",
+    "step": 4303,
+    "sha256": "151701bc1a4f572bb62af22e4bc2c6db5b3a755b95c1ae93ad1a388d1ec17078",
+    "rank": 32,
+    "alpha": 32
+  },
+  "runtime_versions": {
+    "torch": "2.12.1+cu130",
+    "diffusers": "0.38.0.dev0",
+    "transformers": "5.5.3",
+    "accelerate": "1.12.0",
+    "peft": "0.18.1",
+    "optimum-quanto": "0.2.4",
+    "bitsandbytes": "0.49.1",
+    "safetensors": "0.8.0"
+  }
+}
