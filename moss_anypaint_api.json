@@ -5,22 +5,6 @@
       "image": "moss_anypaint_source.png"
     }
   },
-  "2": {
-    "class_type": "LoadImage",
-    "inputs": {
-      "image": "moss_anypaint_mask.png"
-    }
-  },
-  "3": {
-    "class_type": "ImageToMask",
-    "inputs": {
-      "image": [
-        "2",
-        0
-      ],
-      "channel": "red"
-    }
-  },
   "4": {
     "class_type": "MOSSAnyPaintLoader",
     "inputs": {
@@ -37,8 +21,8 @@
         0
       ],
       "generated_mask": [
-        "3",
-        0
+        "1",
+        1
       ],
       "left": 0,
       "top": 0,

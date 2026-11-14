@@ -44,8 +44,6 @@ def add_distillation(dit, path):
     from peft.tuners.lora import LoraLayer
     spec = LOCK["distillation"]
     path = Path(path)
-    if sha(path) != spec["files"]["lora_dmd2.safetensors"]["sha256"]:
-        raise RuntimeError("Distillation adapter checksum mismatch")
     state = load_file(str(path))
     targets = r"layers\.\d+\.proj\.(q|k|v|o|ffn_up_gate|ffn_down)"
     inject_adapter_in_model(LoraConfig(r=128, lora_alpha=128, target_modules=targets), dit, adapter_name="distillation")
@@ -67,8 +65,8 @@ def add_distillation(dit, path):
                 parameter_name = name + "." + target + ".distillation.weight"
                 value = state[key]
                 parameter = parameters[parameter_name]
-                if value.dtype != torch.float32 or value.shape != parameter.shape or not torch.isfinite(value).all():
-                    raise RuntimeError(f"Distillation shape/dtype mismatch: {key}")
+                if not value.is_floating_point() or value.shape != parameter.shape or not torch.isfinite(value).all():
+                    raise RuntimeError(f"Incompatible distillation tensor shape or type: {key}")
                 parameter.data = value.to(device="cuda", dtype=torch.float32)
                 copied.add(parameter_name)
                 used.add(key)

@@ -178,9 +178,7 @@ MOSS AnyPaint Loader + prepared input -> MOSS AnyPaint Generate -> Save Image
 MOSS AnyPaint Prepare.input_with_mask -> Preview Image
 ```
 
-Copy `examples/moss_anypaint_source.png` and `examples/moss_anypaint_mask.png`
-into ComfyUI's input folder for the supplied example. Connect the mask through
-`ImageToMask/red`, or use the source image's Mask Editor output directly.
+The default workflow uses one Load Image for both the source and its mask.
 `moss_anypaint_api.json` provides the same graph in ComfyUI API form.
 
 Recommended settings: 8 steps, Euler, CFG 1, shift 5, and both adapter strengths
@@ -196,6 +194,81 @@ source composite.
 Use v0.1.1 or later for full uint64 seed support and corrected source-sized mask
 placement. Update the node code and shared runtime together; no new adapter
 weight download is required.
+
+## Usage
+
+### Inpaint without changing image size
+
+1. Import `moss_anypaint_workflow.json`. Select `moss_anypaint_rank32.safetensors`
+   and the Base 8-step DMD2 `lora_dmd2.safetensors` in **MOSS AnyPaint Loader**.
+   Leave `base_model_dir` blank to download the Base components, or select your
+   local HF model folder. Install requirements first as described above.
+2. Copy `examples/moss_anypaint_source.png` into ComfyUI's input folder and select
+   it in the workflow's **single Load Image** node to run the supplied example.
+   Its edit mask is already embedded in transparency, while the source RGB is
+   retained. For your own image, connect its `IMAGE` to Prepare's `source` and a
+   `MASK` from **SAM or another mask node** to `generated_mask`. Mask Editor is
+   also available through the already-wired Load Image `MASK` output.
+3. Leave Prepare's `left`, `top`, `right`, `bottom` at **0** for same-canvas edits.
+   Dimensions are aligned upward to multiples of 16, so non-aligned inputs can
+   still gain a few right/bottom pixels.
+4. Enter the **complete desired image description** in **MOSS AnyPaint Generate →
+   prompt**, then queue. For object removal, describe the scene that should remain;
+   exact removal is not guaranteed. Generate → Save Image produces the result.
+   Prepare's `input_with_mask` preview shows the actual generated region.
+
+### Outpaint
+
+Set only the side(s) you want to extend in Prepare: `left`, `top`, `right`,
+`bottom`, in pixels. For example, `right=256` adds 256 pixels on the right;
+leave the other sides at 0. Padding creates the generated area automatically,
+so no hand-drawn mask is needed for a pure outpaint. You can also draw an internal
+mask to combine inpainting and outpainting. The source image is not stretched.
+For pure outpainting with the supplied example, clear or disconnect its embedded
+internal mask first, otherwise both regions will be edited.
+
+### Connect a mask from SAM or other nodes
+
+Connect the source `IMAGE` to Prepare's `source`, and a `MASK` from SAM or any
+other mask-producing node to Prepare's `generated_mask`. There is no required
+mask tool. **White / 1 means regenerate; black / 0 means preserve.** For object
+removal, the selected object should be white. Preview the mask to check the
+selection and invert it if the generating node uses the opposite convention.
+
+```text
+Load Image.IMAGE ──────────────────────> AnyPaint Prepare.source
+       └──> SAM / segmentation node ──> AnyPaint Prepare.generated_mask
+```
+
+A segmentation prompt selects **what to mask**; the AnyPaint generation prompt
+in Encode (Krea2) or Generate (MOSS) describes **the image you want afterward**.
+If a mask misses an object's outline, hair or shadow, optionally use a standard
+Grow Mask node before Prepare. Choose the expansion yourself; this workflow
+does not add an automatic growth setting or a required segmentation dependency.
+
+Other optional mask sources:
+
+- **Mask Editor:** use the source Load Image's `MASK` output after saving the edit.
+  The bundled single-Load-Image workflow is wired this way; replace that MASK
+  connection with your SAM output if preferred.
+- **Separate black/white image:** Load Image `IMAGE` → ImageToMask (`red`) →
+  Prepare `generated_mask`. Its ordinary Load Image `MASK` output reads inverse
+  transparency, not black/white colors.
+
+Masks are binary: values above 0.5 generate, all other values preserve. Gray or
+partially transparent masks do not provide proportional edit strength.
+
+### Update existing workflows
+
+Import the updated workflow for the single Load Image setup. Alternatively,
+connect your source Load Image's `MASK` directly to Prepare's `generated_mask`
+and remove the separate mask loader and ImageToMask nodes. For the ready-made
+example, also use the updated `examples/moss_anypaint_source.png`.
+
+The DMD2 loader no longer requires an exact file SHA256. It still needs a
+compatible MOSS Base 8-step DMD2 adapter; renaming an unrelated LoRA does not make
+it compatible. The recommended download is linked under Requirements. Update
+the nodes and shared runtime together. No new AnyPaint weight is required.
 
 ## Credits
 

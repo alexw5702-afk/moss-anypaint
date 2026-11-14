@@ -56,6 +56,12 @@ class MOSSAnyPaintPrepare:
 
     RETURN_TYPES = ("MOSS_ANYPAINT_INPUT", "IMAGE", "MASK")
     RETURN_NAMES = ("prepared", "input_with_mask", "generated_mask")
+    DESCRIPTION = (
+        "Connect source IMAGE and a MASK from SAM, Mask Editor or another mask node. "
+        "For a separate black/white mask image, use ImageToMask (red). "
+        "White/values above 0.5 generate; black/other values preserve. "
+        "Padding defaults to zero; add padding only for outpainting."
+    )
     FUNCTION = "prepare"
     CATEGORY = "MOSS/AnyPaint"
 

@@ -2,7 +2,7 @@
 # Copyright 2026 DeepMachine contributors.
 """MOSS AnyPaint inference shared by the HF example and ComfyUI nodes.
 
-Apache-2.0. Uses the reviewed4303-step adapter and unmerged FP32 Base DMD2.
+Apache-2.0. Uses the AnyPaint adapter and unmerged FP32 Base DMD2.
 """
 from __future__ import annotations
 
@@ -39,14 +39,12 @@ class MOSSAnyPaintPipeline:
         if not self.adapter_path.is_file():
             self.adapter_path = Path(hf_hub_download(LOCK["task"]["repo"], LOCK["task"]["file"]))
         if sha(self.adapter_path) != LOCK["task"]["sha256"]:
-            raise ValueError("AnyPaint weight is not the reviewed4303-step release")
+            raise ValueError("AnyPaint adapter does not match this release")
         self.model_dir = Path(model_dir or snapshot_download(
             LOCK["base_model"]["repo"], revision=LOCK["base_model"]["revision"],
             allow_patterns=["transformer/*", "text_encoder/*", "tokenizer/*", "vae/*"]))
         self.distillation_path = Path(distillation_path or hf_hub_download(
             LOCK["distillation"]["repo"], "lora_dmd2.safetensors", revision=LOCK["distillation"]["revision"]))
-        if sha(self.distillation_path) != LOCK["distillation"]["files"]["lora_dmd2.safetensors"]["sha256"]:
-            raise ValueError("Base DMD2 file/revision mismatch")
         self.pipe = None
         self._text = None
         self._prompt_cache = {}

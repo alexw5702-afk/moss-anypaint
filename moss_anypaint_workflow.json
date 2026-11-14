@@ -29,7 +29,9 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null,
+          "links": [
+            3
+          ],
           "slot_index": 1
         }
       ],
@@ -39,84 +41,8 @@
       "widgets_values": [
         "moss_anypaint_source.png",
         "image"
-      ]
-    },
-    {
-      "id": 2,
-      "type": "LoadImage",
-      "pos": [
-        0,
-        360
       ],
-      "size": [
-        320,
-        340
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            2
-          ],
-          "slot_index": 0
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null,
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LoadImage"
-      },
-      "widgets_values": [
-        "moss_anypaint_mask.png",
-        "image"
-      ]
-    },
-    {
-      "id": 3,
-      "type": "ImageToMask",
-      "pos": [
-        320,
-        360
-      ],
-      "size": [
-        340,
-        250
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 2
-        }
-      ],
-      "outputs": [
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": [
-            3
-          ],
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ImageToMask"
-      },
-      "widgets_values": [
-        "red"
-      ]
+      "title": "Source image"
     },
     {
       "id": 4,
@@ -156,8 +82,8 @@
       "id": 5,
       "type": "MOSSAnyPaintPrepare",
       "pos": [
-        600,
-        140
+        440,
+        300
       ],
       "size": [
         340,
@@ -332,22 +258,6 @@
       "IMAGE"
     ],
     [
-      2,
-      2,
-      0,
-      3,
-      0,
-      "IMAGE"
-    ],
-    [
-      3,
-      3,
-      0,
-      5,
-      1,
-      "MASK"
-    ],
-    [
       4,
       4,
       0,
@@ -378,6 +288,14 @@
       8,
       0,
       "IMAGE"
+    ],
+    [
+      3,
+      1,
+      1,
+      5,
+      1,
+      "MASK"
     ]
   ],
   "groups": [],
