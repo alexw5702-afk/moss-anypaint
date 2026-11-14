@@ -1,6 +1,6 @@
 # Licenses and provenance
 
-The selected AnyPaint adapter and DeepMachine's runtime/node modifications are
+The AnyPaint adapter and DeepMachine's runtime/node modifications are
 Apache-2.0, Copyright 2026 DeepMachine contributors. `LICENSE` applies to the
 adapter and package; `PIPELINE_LICENSE` explicitly supplies the code license.
 Existing upstream rights are retained. No upstream model weights are bundled.
@@ -20,7 +20,7 @@ NOTICE records the sources and the changes.
 
 The principal model-forward modifications are registered clean t=0 reference
 tokens, isolated reference attention/KV caching and full-canvas reference RoPE.
-Canvas preparation and workflow interactions follow DeepMachine's evaluated
+Canvas preparation and workflow interactions follow DeepMachine's
 AnyPaint implementation. The older Krea model weights and model-specific DiT
 patch are not bundled; their model license is not applied to MOSS weights.
 The ComfyUI wrapper uses this same runtime through standard IMAGE/MASK I/O.
@@ -29,5 +29,5 @@ PyTorch, Torchvision, Transformers, PEFT, Quanto, DiffSynth, NumPy, Pillow,
 OpenCV, Safetensors, Hugging Face Hub, Accelerate and ComfyUI are installed
 separately and remain subject to their own licenses. They are not vendored here.
 Synthetic showcase sources were already distributed in DeepMachine's preceding
-Krea AnyPaint release; the selected MOSS outputs and masks are supplied here
+Krea AnyPaint release; the MOSS outputs and masks are supplied here
 for reproduction. No private training images or training manifests are included.

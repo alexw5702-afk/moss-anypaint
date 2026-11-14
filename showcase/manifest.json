@@ -4,7 +4,6 @@
     "label": "Photographic internal edit",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -20,7 +19,6 @@
     "mask": "01_photo_internal_mask.png",
     "input": "01_photo_internal_input_mask.webp",
     "result": "01_photo_internal_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "0bef8e0e5ecb74ef789d8dc591fc204d89b7cd6996e1789dddfdfcffbc5c58fc",
       "mask": "7d27ee47ac736e14b41a2c0e91f80eb8c8a4c5e75732d37a7118ef0cc5a3d22e",
@@ -33,7 +31,6 @@
     "label": "Watercolor downward outpainting",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1536
@@ -49,7 +46,6 @@
     "mask": "02_watercolor_outpaint_mask.png",
     "input": "02_watercolor_outpaint_input_mask.webp",
     "result": "02_watercolor_outpaint_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "4efe48474687d31d47f8b89b4c73e47a9369d37d47695741c225cc30dd55f437",
       "mask": "69a6a3a1f8e4e9e9d705545dbe4fe849e4685aaade3c405a4a0caa17a14e11b8",
@@ -62,7 +58,6 @@
     "label": "Stylized 3D horizontal outpainting",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1536,
       1024
@@ -78,7 +73,6 @@
     "mask": "03_3d_outpaint_mask.png",
     "input": "03_3d_outpaint_input_mask.webp",
     "result": "03_3d_outpaint_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "447be13e6afb4f534fb3520e8649ee380eba5da12cdb3e9538fdecc2bd5b8578",
       "mask": "dc1612b94e9ec3b07bdc4abb1b7480e3068537e94f9bedd34758ec06dd4dbdae",
@@ -91,7 +85,6 @@
     "label": "Original-character mixed edit",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1536,
       1024
@@ -107,7 +100,6 @@
     "mask": "04_portrait_mixed_mask.png",
     "input": "04_portrait_mixed_input_mask.webp",
     "result": "04_portrait_mixed_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "aae5ff6ba55f6ed47bdb931c3a8af13f6e6c4ef9216160dc34c8bb2305405c69",
       "mask": "2f2ac67652f469418fc767cd53afee2e51c69d0a8ba88aaf5dcad08c519609f7",
@@ -120,7 +112,6 @@
     "label": "Disconnected honeybee insertion",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -136,7 +127,6 @@
     "mask": "05_botanical_disconnected_mask.png",
     "input": "05_botanical_disconnected_input_mask.webp",
     "result": "05_botanical_disconnected_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "148b15d23e1cbae3cddf424b2e64b0b716ab65df8571c29b4703e9258c0c3f25",
       "mask": "fc4090c3a9279980df307a8f5592f20fa6e506bec6fb57f827a4dd23f7f4333d",
@@ -149,7 +139,6 @@
     "label": "Narrow cable recolor",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -165,7 +154,6 @@
     "mask": "07_product_narrow_mask.png",
     "input": "07_product_narrow_input_mask.webp",
     "result": "07_product_narrow_result.webp",
-    "mask_buffer_px": 24,
     "sha256": {
       "source": "b67270bd9d12001cb125e6aad8efa00f92309adbbfbcb485476a9acd16a32256",
       "mask": "538429d0cc1fec32359431d58d83eb3a319d77caf3c4bfa3cbea219ac412e52e",
@@ -178,7 +166,6 @@
     "label": "Complex semantic landscape edit",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1536,
       1024
@@ -194,7 +181,6 @@
     "mask": "08_landscape_complex_mask.png",
     "input": "08_landscape_complex_input_mask.webp",
     "result": "08_landscape_complex_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "e79e3ddf8aa03f1a9ad32b1ab68a5d036a7aa4bffcc572e6c8f3ae2c2758ad2f",
       "mask": "56914e9d22caf0ef23070bba069d61bf5d6726005638594e0411ed8254fc37a7",
@@ -207,7 +193,6 @@
     "label": "Female disconnected accessories",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -223,7 +208,6 @@
     "mask": "10_female_accessories_mask.png",
     "input": "10_female_accessories_input_mask.webp",
     "result": "10_female_accessories_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "4af3742b1e854ced89ab484aa8ed815d8bdd4a2eef9e6c46cad1d5ea5299f76f",
       "mask": "5175c194d12349605ea6a1e61a7aca0061cc419834023f7fcbb62bfa58314bad",
@@ -236,7 +220,6 @@
     "label": "Shoes and bag local redesign",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -252,7 +235,6 @@
     "mask": "11_product_restyle_mask.png",
     "input": "11_product_restyle_input_mask.webp",
     "result": "11_product_restyle_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "eaf32a072c469895e9af1b0d5f439a1310c0461baa805f699e5b0b43d7cbd7e4",
       "mask": "86fb57bed159701f3db7631dfae87b7264b920291f0ea4ca8ee614051bc4f253",
@@ -265,7 +247,6 @@
     "label": "Two desktop object insertions",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -281,7 +262,6 @@
     "mask": "12_desk_objects_mask.png",
     "input": "12_desk_objects_input_mask.webp",
     "result": "12_desk_objects_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "13b1ecd113e8438dbfeeb82f5af6f83237db19d15e11c2a7d6bdd47500308ebb",
       "mask": "9b0e48dc84dd325ed32e6e704d5d326981fa78e76da441ac0726ef383db387c3",
@@ -294,7 +274,6 @@
     "label": "Living-room multi-region insertion",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -310,7 +289,6 @@
     "mask": "13_living_room_objects_mask.png",
     "input": "13_living_room_objects_input_mask.webp",
     "result": "13_living_room_objects_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "f5249882b049389a48450d7dfd4c7414a748547d24a19ddb3e1e0ef1ede5132b",
       "mask": "4f96562e46bf8ad09b8a854b50fefb38832c873a9b9ad5de7a636649372f8b73",
@@ -323,7 +301,6 @@
     "label": "Complete window-view replacement",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -339,7 +316,6 @@
     "mask": "14_window_view_mask.png",
     "input": "14_window_view_input_mask.webp",
     "result": "14_window_view_result.webp",
-    "mask_buffer_px": 0,
     "sha256": {
       "source": "72946cd875ff9dc145525ec967d704ab6674ce3c92c42c8489055ccdae598ff6",
       "mask": "efd16deeade385111ed0104eb5afb216976e2c3fef5e9d7f8719f17a01049a33",

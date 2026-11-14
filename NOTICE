@@ -21,7 +21,7 @@ lora.safetensors file. This package does not redistribute the DMD2 weights.
 
 Showcase sources are synthetic Krea-generated examples already included in
 our earlier Krea AnyPaint release. The outputs in this package are generated
-with MOSS AnyPaint4303 at seed 2026. No training data is distributed.
+with MOSS AnyPaint at seed 2026. No training data is distributed.
 
 Mask/canvas and workflow interfaces follow the earlier DeepMachine Krea
 AnyPaint release; the Krea model-specific reference implementation and its

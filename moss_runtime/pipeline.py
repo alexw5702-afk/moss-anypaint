@@ -2,7 +2,7 @@
 # Copyright 2026 DeepMachine contributors.
 """MOSS AnyPaint inference shared by the HF example and ComfyUI nodes.
 
-Apache-2.0. Uses the reviewed4303-step adapter and unmerged FP32 Base DMD2.
+Apache-2.0. Uses the released adapter and unmerged FP32 Base DMD2.
 """
 from __future__ import annotations
 
@@ -39,7 +39,7 @@ class MOSSAnyPaintPipeline:
         if not self.adapter_path.is_file():
             self.adapter_path = Path(hf_hub_download(LOCK["task"]["repo"], LOCK["task"]["file"]))
         if sha(self.adapter_path) != LOCK["task"]["sha256"]:
-            raise ValueError("AnyPaint weight is not the reviewed4303-step release")
+            raise ValueError("AnyPaint adapter checksum mismatch")
         self.model_dir = Path(model_dir or snapshot_download(
             LOCK["base_model"]["repo"], revision=LOCK["base_model"]["revision"],
             allow_patterns=["transformer/*", "text_encoder/*", "tokenizer/*", "vae/*"]))
@@ -133,7 +133,7 @@ class MOSSAnyPaintPipeline:
             if not torch.isfinite(latent).all():
                 raise RuntimeError("Non-finite model output")
             image = pipe.vae_output_to_image(pipe.vae.decode(latent))
-            self.last_metadata = {"checkpoint_step": 4303, "seed": seed, "steps": steps,
+            self.last_metadata = {"seed": seed, "steps": steps,
                                   "adapter_sha256": LOCK["task"]["sha256"], "seconds": time.monotonic() - start,
                                   "output_contract": "raw_model_output_no_final_rgb_composite"}
             return image

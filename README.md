@@ -1,6 +1,6 @@
 # ComfyUI MOSS AnyPaint
 
-Arbitrary-mask editing and outpainting with the selected4303-step
+Arbitrary-mask editing and outpainting with the
 [MOSS AnyPaint adapter](https://huggingface.co/yijunwang2/moss-anypaint).
 
 These nodes **share the portable HF runtime**, preserving the tested qfloat8/
@@ -34,7 +34,7 @@ into ComfyUI's input folder and select them in the two Load Image nodes.
 The second image is converted to a generated mask through ImageToMask/red.
 Alternatively use the source Load Image Mask Editor output directly.
 
-The supplied PNG is losslessly converted from the reviewed source's Pillow RGB.
+The supplied PNG is losslessly converted from the source's Pillow RGB.
 Recent ComfyUI Load Image uses a different WebP decode path, which can slightly
 change RGB values before sampling. Use this PNG for strict fixed-seed matching.
 
@@ -50,7 +50,7 @@ is not resized by padding; right/bottom alignment pixels are added if needed.
 Only exterior seams gain32px latent redraw; internal brushes remain exact.
 
 The default example is seed 2026,8 steps. The sampler returns raw decoded RGB,
-with no final source composite. The loader checks the selected task and DMD2
+with no final source composite. The loader checks the task and DMD2
 hashes, and the two adapters stay separate.
 
 Seeds accept the full uint64 range (0 through2**64−1), including ComfyUI's
@@ -68,7 +68,7 @@ of the sample seed. The JSON metadata output includes the actual seed/step/hash.
 
 ## Showcase
 
-All 12 cases use seed 2026 and the selected4303-step weights. Inputs show the
+The examples use seed 2026. Inputs show the
 actual mask overlay, alongside each result. Original sources and binary masks
 remain available for reproduction.
 
@@ -81,20 +81,11 @@ Apache-2.0. See [LICENSE](LICENSE), [PIPELINE_LICENSE](PIPELINE_LICENSE),
 previous Krea AnyPaint nodes; MOSS model code comes from the shared released
 runtime, not the Krea DiT patch. Base and DMD2 assets are downloaded separately.
 
-## Validation
+The distribution includes SHA256SUMS for the shipped files. Release assets
+include the ComfyUI ZIP, its checksum, and UI/API workflow JSON files.
 
-Validated with the pinned runtime on RTX 5090: internal editing, outpainting and
-mixed editing match the selected fixed-seed outputs pixel for pixel. ComfyUI
-0.45.0 API workflow validation uses the canonical PNG example input to preserve
-the same decoded RGB values. See the runtime lock for exact model revisions.
+## Compatibility
 
-The distribution includes SHA256SUMS for all shipped files. Release assets also
-include a ComfyUI ZIP, its checksum, and both UI/API workflow JSON files.
-
-## v0.1.1 update
-
-Fixes the large-seed failure in v0.1.0 and the portable source-mask placement
-behavior. The builders now reject unlisted source files and symlinks before
-copying. The selected4303 adapter, seed2026 examples, sampler and precision are
-unchanged; update the node code/runtime together, with no new weights required.
-The v0.1.0 tag and assets remain available as historical artifacts.
+Use the matching node/runtime files when upgrading. The v0.1.1 runtime and later
+support full uint64 seeds and source/canvas-sized masks. See the workflow above
+for placement and padding controls.
