@@ -1,6 +1,6 @@
 # ComfyUI MOSS AnyPaint
 
-ComfyUI nodes for the
+Native ComfyUI nodes for the
 [`yijunwang2/moss-anypaint`](https://huggingface.co/yijunwang2/moss-anypaint)
 functional adapter. AnyPaint adds arbitrary-mask **inpainting**, **outpainting**,
 and mixed **image editing** to MOSS-Image-Base.
@@ -8,7 +8,7 @@ and mixed **image editing** to MOSS-Image-Base.
 [Model and portable inference example](https://huggingface.co/yijunwang2/moss-anypaint)
 | [ComfyUI releases](https://github.com/alexw5702-afk/moss-anypaint/releases)
 
-![AnyPaint examples](showcase/contact_sheet.webp)
+![AnyPaint examples](showcase.webp)
 
 <!-- SHOWCASE_EXAMPLES_START -->
 <details>
@@ -70,7 +70,6 @@ and mixed **image editing** to MOSS-Image-Base.
 
 **Prompt:** an original alpine valley after rain with clusters of luminous rainbow-colored fantasy mushrooms growing along the winding riverbanks and foreground rocks, subtle magical glow reflected in wet stone, coherent wide cinematic landscape photograph
 
-
 ### 10_female_accessories - Female disconnected accessories
 
 | Source | Generated mask | AnyPaint result |
@@ -111,7 +110,6 @@ and mixed **image editing** to MOSS-Image-Base.
 
 **Prompt:** a quiet contemporary reading room whose large central picture window overlooks a snowy mountain lake beneath a clear pale-blue winter sky, armchair in the foreground, coherent daylight, reflections and realistic interior photography
 
-
 </details>
 <!-- SHOWCASE_EXAMPLES_END -->
 
@@ -122,21 +120,23 @@ cd ComfyUI/custom_nodes
 git clone https://github.com/alexw5702-afk/moss-anypaint
 ```
 
-Install `requirements.txt` with the Python interpreter used by your ComfyUI
-instance, then restart ComfyUI.
+Restart ComfyUI, then place
+`moss_anypaint_rank32.safetensors` in `ComfyUI/models/loras`.
 
 ## Requirements
 
-- Python 3.11+, a current ComfyUI build, and a CUDA GPU with BF16 support.
-- [MOSS AnyPaint LoRA](https://huggingface.co/yijunwang2/moss-anypaint/blob/main/moss_anypaint_rank32.safetensors)
-  in `ComfyUI/models/loras`.
-- [Base 8-step DMD2 `lora_dmd2.safetensors`](https://huggingface.co/lodestones/MOSS-Image-Base-8-steps-dmd/resolve/da05cb3b52899179e2bb5f7efe1058fefcbae21b/lora_dmd2.safetensors)
-  in `ComfyUI/models/loras`.
+- A current ComfyUI build with native MOSS support.
+- [`moss_image_base_int8_convrot.safetensors`](https://huggingface.co/Comfy-Org/MOSS-Image/blob/main/diffusion_models/moss_image_base_int8_convrot.safetensors)
+  in `ComfyUI/models/diffusion_models`.
+- [`qwen3.5_9b_int8_convrot.safetensors`](https://huggingface.co/Comfy-Org/MOSS-Image/blob/main/text_encoders/qwen3.5_9b_int8_convrot.safetensors)
+  in `ComfyUI/models/text_encoders`.
+- [`flux2-vae_small.safetensors`](https://huggingface.co/Comfy-Org/MOSS-Image/blob/main/vae/flux2-vae_small.safetensors)
+  in `ComfyUI/models/vae`.
+- [MOSS AnyPaint LoRA](https://huggingface.co/yijunwang2/moss-anypaint/blob/main/moss_anypaint_rank32.safetensors).
+- [Base 8-step DMD2 LoRA](https://huggingface.co/lodestones/MOSS-Image-Base-8-steps-dmd/blob/main/lora_dmd2.safetensors)
+  in `ComfyUI/models/loras`. Load it with a second ordinary Load LoRA node.
 
-The Loader downloads the MOSS-Image-Base HF components on first use. Alternatively,
-set `base_model_dir` to a local folder containing `transformer/`, `text_encoder/`,
-`tokenizer/` and `vae/`. Native Comfy-Org single-file checkpoints and SFT weights
-are not inputs to this loader.
+No custom sampler and no final source composite are required.
 
 ## Nodes
 
@@ -146,26 +146,30 @@ Takes a source image, optional arbitrary mask, and four padding values. White
 mask pixels and all padded canvas pixels are generated; black pixels are
 preserved. The node outputs:
 
-- the prepared canvas and mask for the shared runtime;
-- the input with its mask overlay;
-- the generated mask.
+- a 384px semantic reference for MOSS reference attention;
+- the full-resolution known canvas;
+- generated and preserved masks;
+- aligned canvas dimensions.
 
 Use the `MASK` output from ComfyUI's `Load Image` Mask Editor directly. For
 inpainting, keep all padding at zero. For outpainting, add space on any side.
 Both can be combined in one request.
 
-### MOSS AnyPaint Loader
+### MOSS AnyPaint Encode
 
-Loads the MOSS AnyPaint adapter, Base 8-step DMD2 adapter and MOSS-Image-Base
-components into the shared HF runtime. Select both adapters from the LoRA folder;
-leave `base_model_dir` blank to download the Base components automatically.
+Encodes the prompt/reference and returns a standard ComfyUI `LATENT` containing
+the known image plus a token-aligned `noise_mask`. ComfyUI's sampler applies the
+same timestep-matched preservation used by the standalone reference pipeline:
 
-### MOSS AnyPaint Generate
+```text
+known_at_sigma = sigma * initial_noise + (1 - sigma) * known_latent
+```
 
-Takes the loaded pipeline, prepared input, prompt, seed and inference steps.
-Returns a standard ComfyUI `IMAGE` and generation metadata. Set
-`keep_model_loaded=true` to reuse the loaded runtime for subsequent requests;
-set it false to release model allocations after generation.
+### MOSS AnyPaint Model Patch
+
+Registers the semantic reference over the complete target grid and precomputes
+its isolated reference K/V cache. Connect this node after `Load LoRA` and before
+`KSampler`.
 
 ## Workflow
 
@@ -173,49 +177,37 @@ Drag [`moss_anypaint_workflow.json`](moss_anypaint_workflow.json) into
 ComfyUI. The important wiring is:
 
 ```text
-Load Image (image + mask) -> MOSS AnyPaint Prepare
-MOSS AnyPaint Loader + prepared input -> MOSS AnyPaint Generate -> Save Image
-MOSS AnyPaint Prepare.input_with_mask -> Preview Image
+Load Image (image + mask) -> AnyPaint Prepare
+AnyPaint Prepare + CLIP + VAE -> AnyPaint Encode
+Load Diffusion Model -> Load LoRA (AnyPaint) -> Load LoRA (DMD2)
+    -> AnyPaint Model Patch -> KSampler
+AnyPaint Encode.latent -> KSampler.latent_image
+KSampler -> VAE Decode -> Save Image
 ```
 
-The default workflow uses one Load Image for both the source and its mask.
-`moss_anypaint_api.json` provides the same graph in ComfyUI API form.
+Recommended MOSS-Image-Base settings: 8 steps, Euler, simple scheduler, CFG 1.0,
+LoRA strength 1.0, K/V cache enabled.
 
-Recommended settings: 8 steps, Euler, CFG 1, shift 5, and both adapter strengths
-at 1. The runtime uses qfloat8 frozen DiT/text weights, BF16 compute/task adapter,
-FP32 VAE and an unmerged FP32 DMD2 adapter. These nodes use the shared HF runtime
-rather than a native KSampler MODEL patch.
-
-Source-sized masks follow the padding offset; canvas-sized masks use canvas
-coordinates. Only exterior source seams have a 32-pixel inward redraw band;
-internal masks are exact. The output is the raw model decode, with no final
-source composite.
-
-Use v0.1.1 or later for full uint64 seed support and corrected source-sized mask
-placement. Update the node code and shared runtime together; no new adapter
-weight download is required.
+The output is the raw model decode. Do not add the old registered-outpaint
+composite node: AnyPaint preserves known pixels during every denoising step.
 
 ## Usage
 
 ### Inpaint without changing image size
 
-1. Import `moss_anypaint_workflow.json`. Select `moss_anypaint_rank32.safetensors`
-   and the Base 8-step DMD2 `lora_dmd2.safetensors` in **MOSS AnyPaint Loader**.
-   Leave `base_model_dir` blank to download the Base components, or select your
-   local HF model folder. Install requirements first as described above.
-2. Copy `examples/moss_anypaint_source.png` into ComfyUI's input folder and select
-   it in the workflow's **single Load Image** node to run the supplied example.
-   Its edit mask is already embedded in transparency, while the source RGB is
-   retained. For your own image, connect its `IMAGE` to Prepare's `source` and a
-   `MASK` from **SAM or another mask node** to `generated_mask`. Mask Editor is
-   also available through the already-wired Load Image `MASK` output.
-3. Leave Prepare's `left`, `top`, `right`, `bottom` at **0** for same-canvas edits.
-   Dimensions are aligned upward to multiples of 16, so non-aligned inputs can
-   still gain a few right/bottom pixels.
-4. Enter the **complete desired image description** in **MOSS AnyPaint Generate →
-   prompt**, then queue. For object removal, describe the scene that should remain;
-   exact removal is not guaranteed. Generate → Save Image produces the result.
-   Prepare's `input_with_mask` preview shows the actual generated region.
+1. Import `moss_anypaint_workflow.json` and select your installed model, text
+   encoder, VAE, AnyPaint LoRA and DMD2 LoRA in their loader nodes.
+2. Load your source image and connect a `MASK` from **SAM or another mask node**
+   to Prepare's `generated_mask`. The source `IMAGE` connects to Prepare's `source`.
+   You can also use the already-wired Load Image `MASK` output with Mask Editor.
+3. Leave Prepare's `left`, `top`, `right` and `bottom` at **0**. This is the default;
+   it does not request outpainting. Dimensions are aligned upward to multiples
+   of 16, so non-aligned inputs can still gain a few right/bottom pixels.
+4. Enter the **complete desired image description** in **MOSS AnyPaint Encode →
+   prompt**, not Prepare or the empty negative-prompt node. For example, to remove
+   a mug from a table, describe the table and the background you want to remain.
+   This guides generation; exact object removal is not guaranteed.
+5. Queue the workflow. KSampler → VAE Decode → Save Image produces the result.
 
 ### Outpaint
 
@@ -224,8 +216,6 @@ Set only the side(s) you want to extend in Prepare: `left`, `top`, `right`,
 leave the other sides at 0. Padding creates the generated area automatically,
 so no hand-drawn mask is needed for a pure outpaint. You can also draw an internal
 mask to combine inpainting and outpainting. The source image is not stretched.
-For pure outpainting with the supplied example, clear or disconnect its embedded
-internal mask first, otherwise both regions will be edited.
 
 ### Connect a mask from SAM or other nodes
 
@@ -241,7 +231,7 @@ Load Image.IMAGE ─────────────────────
 ```
 
 A segmentation prompt selects **what to mask**; the AnyPaint generation prompt
-in Encode (Krea2) or Generate (MOSS) describes **the image you want afterward**.
+in Encode describes **the image you want afterward**.
 If a mask misses an object's outline, hair or shadow, optionally use a standard
 Grow Mask node before Prepare. Choose the expansion yourself; this workflow
 does not add an automatic growth setting or a required segmentation dependency.
@@ -260,23 +250,17 @@ partially transparent masks do not provide proportional edit strength.
 
 ### Update existing workflows
 
-Import the updated workflow for the single Load Image setup. Alternatively,
-connect your source Load Image's `MASK` directly to Prepare's `generated_mask`
-and remove the separate mask loader and ImageToMask nodes. For the ready-made
-example, also use the updated `examples/moss_anypaint_source.png`.
-
-The DMD2 loader no longer requires an exact file SHA256. It still needs a
-compatible MOSS Base 8-step DMD2 adapter; renaming an unrelated LoRA does not make
-it compatible. The recommended download is linked under Requirements. Update
-the nodes and shared runtime together. No new AnyPaint weight is required.
+Import the updated workflow: it uses ComfyUI's native model, text encoder, VAE,
+LoRA loaders and KSampler. The earlier MOSS Loader/Generate workflow is replaced
+by the same Prepare → Encode → Model Patch layout used by Krea 2 AnyPaint.
+Keep padding at 0 for inpainting. No new AnyPaint weight is required.
 
 ## Credits
 
-The nodes use the shared
-[MOSS AnyPaint runtime](https://huggingface.co/yijunwang2/moss-anypaint), with model
-helpers derived from [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio).
-Base and DMD2 weights are downloaded separately. See `NOTICE` and
-`THIRD_PARTY_NOTICES.md` for the complete attribution chain.
+Node interfaces, workflow and canvas helpers reuse
+[`alexw5702-afk/krea2-anypaint`](https://github.com/alexw5702-afk/krea2-anypaint).
+MOSS model loading, text encoding, attention and sampling use native ComfyUI.
+See `NOTICE` for the complete attribution chain.
 
-Node code and adapter weights are Apache-2.0 licensed. See `LICENSE` and
-`PIPELINE_LICENSE` for the license terms.
+Node code is MIT licensed. The separately downloaded MOSS AnyPaint and Base
+8-step DMD2 weights are Apache-2.0 licensed and retain their upstream terms.

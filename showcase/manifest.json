@@ -4,7 +4,6 @@
     "label": "Photographic internal edit",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -33,7 +32,6 @@
     "label": "Watercolor downward outpainting",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1536
@@ -62,7 +60,6 @@
     "label": "Stylized 3D horizontal outpainting",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1536,
       1024
@@ -91,7 +88,6 @@
     "label": "Original-character mixed edit",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1536,
       1024
@@ -120,7 +116,6 @@
     "label": "Disconnected honeybee insertion",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -149,7 +144,6 @@
     "label": "Narrow cable recolor",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -178,7 +172,6 @@
     "label": "Complex semantic landscape edit",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1536,
       1024
@@ -207,7 +200,6 @@
     "label": "Female disconnected accessories",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -236,7 +228,6 @@
     "label": "Shoes and bag local redesign",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -265,7 +256,6 @@
     "label": "Two desktop object insertions",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -294,7 +284,6 @@
     "label": "Living-room multi-region insertion",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024
@@ -323,7 +312,6 @@
     "label": "Complete window-view replacement",
     "seed": 2026,
     "steps": 8,
-    "checkpoint_step": 4303,
     "canvas_size": [
       1024,
       1024

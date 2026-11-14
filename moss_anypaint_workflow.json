@@ -1,17 +1,67 @@
 {
-  "last_node_id": 8,
-  "last_link_id": 7,
+  "id": "70a3a996-55a4-424a-b4f7-8382610a398b",
+  "revision": 0,
+  "last_node_id": 15,
+  "last_link_id": 20,
   "nodes": [
     {
-      "id": 1,
-      "type": "LoadImage",
+      "id": 2,
+      "type": "LoraLoaderModelOnly",
       "pos": [
-        0,
-        0
+        80,
+        220
       ],
       "size": [
         320,
-        340
+        90
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "moss_anypaint_rank32.safetensors",
+        1.0
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 4,
+      "type": "CLIPLoader",
+      "pos": [
+        80,
+        490
+      ],
+      "size": [
+        320,
+        110
       ],
       "flags": {},
       "order": 0,
@@ -19,233 +69,619 @@
       "inputs": [],
       "outputs": [
         {
-          "name": "IMAGE",
-          "type": "IMAGE",
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 0,
           "links": [
-            1
-          ],
-          "slot_index": 0
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": [
-            3
-          ],
-          "slot_index": 1
+            5,
+            9
+          ]
         }
       ],
       "properties": {
-        "Node name for S&R": "LoadImage"
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "CLIPLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
       },
       "widgets_values": [
-        "moss_anypaint_source.png",
-        "image"
+        "qwen3.5_9b_int8_convrot.safetensors",
+        "moss_image",
+        "default"
       ],
-      "title": "Source image"
+      "color": "#432",
+      "bgcolor": "#653"
     },
     {
-      "id": 4,
-      "type": "MOSSAnyPaintLoader",
+      "id": 5,
+      "type": "VAELoader",
       "pos": [
-        610,
-        -220
+        80,
+        650
       ],
       "size": [
-        340,
-        250
+        320,
+        60
       ],
       "flags": {},
-      "order": 3,
+      "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [
         {
-          "name": "MOSS_ANYPAINT_PIPELINE",
-          "type": "MOSS_ANYPAINT_PIPELINE",
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 0,
           "links": [
-            4
-          ],
-          "slot_index": 0
+            6,
+            14
+          ]
         }
       ],
       "properties": {
-        "Node name for S&R": "MOSSAnyPaintLoader"
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "VAELoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
       },
       "widgets_values": [
-        "moss_anypaint_rank32.safetensors",
-        "lora_dmd2.safetensors",
-        ""
-      ]
+        "flux2-vae_small.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
     },
     {
-      "id": 5,
-      "type": "MOSSAnyPaintPrepare",
+      "id": 11,
+      "type": "KSampler",
       "pos": [
-        440,
-        300
+        810,
+        80
       ],
       "size": [
-        340,
-        250
+        300,
+        270
       ],
       "flags": {},
-      "order": 4,
+      "order": 12,
       "mode": 0,
       "inputs": [
         {
-          "name": "source",
-          "type": "IMAGE",
-          "link": 1
-        },
-        {
-          "name": "generated_mask",
-          "type": "MASK",
-          "link": 3
-        }
-      ],
-      "outputs": [
-        {
-          "name": "prepared",
-          "type": "MOSS_ANYPAINT_INPUT",
-          "links": [
-            5
-          ],
-          "slot_index": 0
-        },
-        {
-          "name": "input_with_mask",
-          "type": "IMAGE",
-          "links": [
-            7
-          ],
-          "slot_index": 1
-        },
-        {
-          "name": "generated_mask",
-          "type": "MASK",
-          "links": null,
-          "slot_index": 2
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "MOSSAnyPaintPrepare"
-      },
-      "widgets_values": [
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    {
-      "id": 6,
-      "type": "MOSSAnyPaintGenerate",
-      "pos": [
-        990,
-        0
-      ],
-      "size": [
-        340,
-        250
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "pipeline",
-          "type": "MOSS_ANYPAINT_PIPELINE",
+          "name": "model",
+          "type": "MODEL",
           "link": 4
         },
         {
-          "name": "prepared",
-          "type": "MOSS_ANYPAINT_INPUT",
-          "link": 5
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 8
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 10
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 12
         }
       ],
       "outputs": [
         {
-          "name": "image",
-          "type": "IMAGE",
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
           "links": [
-            6
-          ],
-          "slot_index": 0
-        },
-        {
-          "name": "metadata",
-          "type": "STRING",
-          "links": null,
-          "slot_index": 1
+            13
+          ]
         }
       ],
       "properties": {
-        "Node name for S&R": "MOSSAnyPaintGenerate"
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "KSampler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
       },
       "widgets_values": [
-        "a clean oak writing desk in a softly lit home office with a handmade dark green ceramic mug on the left side and a small potted succulent in a matte white planter on the right, coherent restrained contemporary interior photograph",
-        2026,
-        "fixed",
+        496795583768958,
+        "randomize",
         8,
-        true
-      ]
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
     },
     {
-      "id": 7,
-      "type": "SaveImage",
+      "id": 3,
+      "type": "MOSSAnyPaintModelPatch",
       "pos": [
-        1410,
-        0
+        80,
+        360
       ],
       "size": [
         320,
-        340
+        70
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MOSSAnyPaintModelPatch",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        true
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        1010,
+        20
+      ],
+      "size": [
+        140,
+        50
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 13
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "VAEDecode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 8,
+      "type": "MOSSAnyPaintEncode",
+      "pos": [
+        420,
+        80
+      ],
+      "size": [
+        370,
+        300
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 6
+        },
+        {
+          "name": "semantic_reference",
+          "type": "IMAGE",
+          "link": 7
+        },
+        {
+          "name": "known_image",
+          "type": "IMAGE",
+          "link": 16
+        },
+        {
+          "name": "keep_mask",
+          "type": "MASK",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "slot_index": 1,
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MOSSAnyPaintEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "a complete coherent image, consistent lighting, perspective, and detail"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        80,
+        80
+      ],
+      "size": [
+        320,
+        90
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "UNETLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "moss_image_base_int8_convrot.safetensors",
+        "default"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 9,
+      "type": "CLIPTextEncode",
+      "pos": [
+        440,
+        380
+      ],
+      "size": [
+        340,
+        120
       ],
       "flags": {},
       "order": 6,
       "mode": 0,
       "inputs": [
         {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 6
+          "name": "clip",
+          "type": "CLIP",
+          "link": 9
         }
       ],
-      "outputs": [],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            10
+          ]
+        }
+      ],
       "properties": {
-        "Node name for S&R": "SaveImage"
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
       },
       "widgets_values": [
-        "MOSS_AnyPaint"
-      ]
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
     },
     {
-      "id": 8,
-      "type": "PreviewImage",
+      "id": 14,
+      "type": "SaveImage",
       "pos": [
-        1000,
-        640
+        1120,
+        90
       ],
       "size": [
-        320,
-        340
+        570,
+        540
       ],
       "flags": {},
-      "order": 7,
+      "order": 15,
       "mode": 0,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 7
+          "link": 18
         }
       ],
-      "outputs": [],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
       "properties": {
-        "Node name for S&R": "PreviewImage"
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "SaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
       },
-      "widgets_values": []
+      "widgets_values": [
+        "moss_anypaint"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "LoadImage",
+      "pos": [
+        -290,
+        90
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            11
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "slot_index": 1,
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "moss_anypaint_source.png",
+        "image"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "MOSSAnyPaintPrepare",
+      "pos": [
+        430,
+        540
+      ],
+      "size": [
+        360,
+        290
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "IMAGE",
+          "link": 11
+        },
+        {
+          "name": "generated_mask",
+          "type": "MASK",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "semantic_reference",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            7
+          ]
+        },
+        {
+          "name": "known_image",
+          "type": "IMAGE",
+          "slot_index": 1,
+          "links": [
+            16
+          ]
+        },
+        {
+          "name": "generated_mask",
+          "type": "MASK",
+          "slot_index": 2,
+          "links": null
+        },
+        {
+          "name": "keep_mask",
+          "type": "MASK",
+          "slot_index": 3,
+          "links": [
+            17
+          ]
+        },
+        {
+          "name": "canvas_width",
+          "type": "INT",
+          "slot_index": 4,
+          "links": null
+        },
+        {
+          "name": "canvas_height",
+          "type": "INT",
+          "slot_index": 5,
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MOSSAnyPaintPrepare",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        0,
+        0,
+        0,
+        0,
+        384,
+        32
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 15,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        40,
+        230
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "lora_dmd2.safetensors",
+        1.0
+      ]
     }
   ],
   "links": [
@@ -253,61 +689,164 @@
       1,
       1,
       0,
-      5,
+      2,
       0,
-      "IMAGE"
+      "MODEL"
+    ],
+    [
+      2,
+      15,
+      0,
+      3,
+      0,
+      "MODEL"
     ],
     [
       4,
+      3,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      5,
       4,
       0,
-      6,
-      0,
-      "MOSS_ANYPAINT_PIPELINE"
-    ],
-    [
-      5,
-      5,
-      0,
-      6,
-      1,
-      "MOSS_ANYPAINT_INPUT"
-    ],
-    [
-      6,
-      6,
-      0,
-      7,
-      0,
-      "IMAGE"
-    ],
-    [
-      7,
-      5,
-      1,
       8,
       0,
+      "CLIP"
+    ],
+    [
+      6,
+      5,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      7,
+      7,
+      0,
+      8,
+      2,
       "IMAGE"
     ],
     [
+      8,
+      8,
+      0,
+      11,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      4,
+      0,
+      9,
+      0,
+      "CLIP"
+    ],
+    [
+      10,
+      9,
+      0,
+      11,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      11,
+      6,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      8,
+      1,
+      11,
       3,
-      1,
-      1,
+      "LATENT"
+    ],
+    [
+      13,
+      11,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      14,
       5,
+      0,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      16,
+      7,
+      1,
+      8,
+      3,
+      "IMAGE"
+    ],
+    [
+      17,
+      7,
+      3,
+      8,
+      4,
+      "MASK"
+    ],
+    [
+      18,
+      12,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      19,
+      6,
+      1,
+      7,
       1,
       "MASK"
+    ],
+    [
+      20,
+      2,
+      0,
+      15,
+      0,
+      "MODEL"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
+    "ue_links": [],
     "ds": {
-      "scale": 0.75,
+      "scale": 0.7513148009015777,
       "offset": [
-        100,
-        280
+        628.5910902113438,
+        308.84327951766414
       ]
-    }
+    },
+    "links_added_by_ue": [],
+    "frontendVersion": "1.45.21",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
   },
   "version": 0.4
 }

@@ -1,69 +1,166 @@
 {
   "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "moss_image_base_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "lora_name": "moss_anypaint_rank32.safetensors",
+      "strength_model": 1.0
+    }
+  },
+  "15": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "lora_name": "lora_dmd2.safetensors",
+      "strength_model": 1.0
+    }
+  },
+  "3": {
+    "class_type": "MOSSAnyPaintModelPatch",
+    "inputs": {
+      "model": [
+        "15",
+        0
+      ],
+      "kv_cache": true
+    }
+  },
+  "4": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3.5_9b_int8_convrot.safetensors",
+      "type": "moss_image",
+      "device": "default"
+    }
+  },
+  "5": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae_small.safetensors"
+    }
+  },
+  "6": {
     "class_type": "LoadImage",
     "inputs": {
       "image": "moss_anypaint_source.png"
     }
   },
-  "4": {
-    "class_type": "MOSSAnyPaintLoader",
-    "inputs": {
-      "anypaint_lora": "moss_anypaint_rank32.safetensors",
-      "dmd2_lora": "lora_dmd2.safetensors",
-      "base_model_dir": ""
-    }
-  },
-  "5": {
+  "7": {
     "class_type": "MOSSAnyPaintPrepare",
     "inputs": {
       "source": [
-        "1",
+        "6",
         0
       ],
       "generated_mask": [
-        "1",
+        "6",
         1
       ],
       "left": 0,
       "top": 0,
       "right": 0,
-      "bottom": 0
-    }
-  },
-  "6": {
-    "class_type": "MOSSAnyPaintGenerate",
-    "inputs": {
-      "pipeline": [
-        "4",
-        0
-      ],
-      "prepared": [
-        "5",
-        0
-      ],
-      "prompt": "a clean oak writing desk in a softly lit home office with a handmade dark green ceramic mug on the left side and a small potted succulent in a matte white planter on the right, coherent restrained contemporary interior photograph",
-      "seed": 2026,
-      "steps": 8,
-      "keep_model_loaded": true
-    }
-  },
-  "7": {
-    "class_type": "SaveImage",
-    "inputs": {
-      "images": [
-        "6",
-        0
-      ],
-      "filename_prefix": "MOSS_AnyPaint"
+      "bottom": 0,
+      "reference_max_edge": 384,
+      "boundary_redraw_px": 32
     }
   },
   "8": {
-    "class_type": "PreviewImage",
+    "class_type": "MOSSAnyPaintEncode",
+    "inputs": {
+      "clip": [
+        "4",
+        0
+      ],
+      "vae": [
+        "5",
+        0
+      ],
+      "semantic_reference": [
+        "7",
+        0
+      ],
+      "known_image": [
+        "7",
+        1
+      ],
+      "keep_mask": [
+        "7",
+        3
+      ],
+      "prompt": "a complete coherent image, consistent lighting, perspective, and detail"
+    }
+  },
+  "9": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "4",
+        0
+      ],
+      "text": ""
+    }
+  },
+  "11": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "3",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "8",
+        1
+      ],
+      "seed": 2026,
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0
+    }
+  },
+  "12": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "vae": [
+        "5",
+        0
+      ],
+      "samples": [
+        "11",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "SaveImage",
     "inputs": {
       "images": [
-        "5",
-        1
-      ]
+        "12",
+        0
+      ],
+      "filename_prefix": "moss_anypaint"
     }
   }
 }
