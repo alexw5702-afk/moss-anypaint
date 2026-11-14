@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 DeepMachine contributors.
-"""Adapter loading for the AnyPaint runtime. Apache-2.0."""
+"""Strict adapters from the validated AnyPaint runtime. Apache-2.0."""
 import hashlib,json,random
 from pathlib import Path
 import numpy as np
@@ -77,7 +77,7 @@ def add_distillation(dit, path):
     if used != set(state) or len(copied) != 504:
         raise RuntimeError("Partial distillation adapter load")
     dit.eval().requires_grad_(False)
-    print("DISTILLATION", spec["repo"], spec["revision"], "FP32, unmerged", flush=True)
+    print("DISTILLATION", spec["repo"], spec["revision"], "504 FP32 tensors, unmerged", flush=True)
     return dit
 
 def load_lora(dit, path):

@@ -28,14 +28,19 @@
   "task": {
     "repo": "yijunwang2/moss-anypaint",
     "file": "moss_anypaint_rank32.safetensors",
-    "sha256": "f80cad1e0237e3659b75e2a7fbd90bde25fabee9b57c3018254b9b72bff7c55b"
+    "step": 4303,
+    "sha256": "151701bc1a4f572bb62af22e4bc2c6db5b3a755b95c1ae93ad1a388d1ec17078",
+    "rank": 32,
+    "alpha": 32
   },
   "runtime_versions": {
     "torch": "2.12.1+cu130",
+    "diffusers": "0.38.0.dev0",
     "transformers": "5.5.3",
     "accelerate": "1.12.0",
     "peft": "0.18.1",
     "optimum-quanto": "0.2.4",
+    "bitsandbytes": "0.49.1",
     "safetensors": "0.8.0"
   }
 }
